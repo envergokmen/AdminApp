@@ -9,4 +9,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0-preview.5.21301.17" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="bin\" />
+    <Folder Include="publish\" />
+  </ItemGroup>
+
 </Project>
