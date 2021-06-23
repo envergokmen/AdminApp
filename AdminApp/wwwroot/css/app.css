@@ -58,3 +58,20 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+    .nav .fa{
+        margin-right:5px;
+    }
+
+.subitem {
+    background: #08042e4d;
+    display:none !important;
+    height:0;
+    padding:0px 0px 0px 32px;
+}
+
+.nav-item:hover .subitem {
+    display: block !important;
+    height: auto;
+}

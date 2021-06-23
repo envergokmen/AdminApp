@@ -1,5 +1,11 @@
-﻿@inherits LayoutComponentBase
+﻿@using Newtonsoft.Json
+@*@using Newtonsoft.Json*@
+@inherits LayoutComponentBase
+@inject HttpClient Http
+@inject StateContainer state
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 
+<h1>@state.Localized("Welcome")</h1>
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -7,11 +13,48 @@
 
     <div class="main">
         <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary @(state.lang=="en"?"active":"")" @onclick='(() => ChangeLang("en"))'>EN</button>
+                <button type="button" class="btn btn-secondary @(state.lang=="tr"?"active":"")" @onclick='(() => ChangeLang("tr"))'>TR</button>
+            </div>
+            <a href="http://blazor.net" target="_blank" class="ml-md-auto">@state.lang</a>
         </div>
 
         <div class="content px-4">
             @Body
         </div>
+<!--
+        <ul class="nav flex-column">
+            @foreach (var item in state.MenuItems)
+            {
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="@item.LinkTo">
+                        <span class="@item.icon" aria-hidden="true"></span> @item.Name
+                    </NavLink>
+                </li>
+            }
+        </ul>-->
+
     </div>
 </div>
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+       state.OnChange += StateHasChanged;
+    }
+
+    private async void ChangeLang(string lang)
+    {
+        await localStorage.SetItemAsync("lang", lang);
+        state.lang = lang;
+
+       state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
+       var langItems = await Http.GetStringAsync($"/ModelData/i18n/{lang}.json");
+       state.LangItems  = JsonConvert.DeserializeObject<Dictionary<string,string>>(langItems);
+
+    }
+}

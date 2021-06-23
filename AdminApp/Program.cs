@@ -1,3 +1,6 @@
+using AdminApp.Services;
+using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +20,13 @@ namespace AdminApp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            var services = builder.Services;
+
+            services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            services.AddScoped<StateContainer>();
+
+            services.AddBlazoredSessionStorage();
+            services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();
         }
