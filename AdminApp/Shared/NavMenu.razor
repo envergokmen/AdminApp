@@ -5,10 +5,18 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 <div class="flex-shrink-0 p-3 bg-white sidemenu" style="width: 280px;" id="sidemenu">
+
+    
     <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
         <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
         <span class="fs-5 fw-semibold">Blazor Admin</span>
     </a>
+    
+    <div class="btn-group btn-group-sm mb-5" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary btn-sm @(state.lang=="en"?"active":"")" @onclick='(() => ChangeLang("en"))'>English</button>
+        <button type="button" class="btn btn-secondary btn-sm @(state.lang=="tr"?"active":"")" @onclick='(() => ChangeLang("tr"))'>Türkçe</button>
+    </div>
+
     <ul class="list-unstyled ps-0">
 
         @foreach (var item in state.MenuItems)
@@ -37,6 +45,8 @@
         }
 
     </ul>
+
+
 </div>
 
 <!--<div class="b-example-divider"></div>-->
@@ -51,6 +61,17 @@
         var langItems = await Http.GetStringAsync($"/ModelData/i18n/{lang}.json");
         state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
         state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
+
+    }
+
+    private async void ChangeLang(string lang)
+    {
+        await localStorage.SetItemAsync("lang", lang);
+        state.lang = lang;
+
+        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
+        var langItems = await Http.GetStringAsync($"/ModelData/i18n/{lang}.json");
+        state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
 
     }
 

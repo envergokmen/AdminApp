@@ -13,15 +13,7 @@
 
      @Body
 
-        <div class="top-row px-4">
-
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary @(state.lang=="en"?"active":"")" @onclick='(() => ChangeLang("en"))'>EN</button>
-                <button type="button" class="btn btn-secondary @(state.lang=="tr"?"active":"")" @onclick='(() => ChangeLang("tr"))'>TR</button>
-            </div>
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">@state.lang</a>
-        </div>
-
+       
       <!--  <div class="content">
           
         </div>-->
@@ -49,14 +41,5 @@
         state.OnChange += StateHasChanged;
     }
 
-    private async void ChangeLang(string lang)
-    {
-        await localStorage.SetItemAsync("lang", lang);
-        state.lang = lang;
-
-        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
-        var langItems = await Http.GetStringAsync($"/ModelData/i18n/{lang}.json");
-        state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
-
-    }
+  
 }
