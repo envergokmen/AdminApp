@@ -4,48 +4,53 @@
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
-<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">AdminApp</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+<div class="flex-shrink-0 p-3 bg-white sidemenu" style="width: 280px;" id="sidemenu">
+    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+        <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-5 fw-semibold">Blazor Admin</span>
+    </a>
+    <ul class="list-unstyled ps-0">
 
-
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
         @foreach (var item in state.MenuItems)
         {
-            <li class="nav-item px-3">
-                <NavLink class="nav-link" href="@item.LinkTo" ActiveClass="selected">
-                    <i class="fa fa-@item.icon" aria-hidden="true"></i> @item.Name
-                </NavLink>
-                @if(item.SubItems!=null)
+            <li class="mb-1">
+
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#@item.Name" aria-expanded="true">
+                    @item.Name
+                </button>
+
+
+
+                @if (item.SubItems != null)
                 {
-                    @foreach (var subitem in item.SubItems)
-                    {
-                           <NavLink class="subitem nav-link" href="@subitem.LinkTo" ActiveClass="selected">
-                                <i class="fa fa-@subitem.icon" aria-hidden="true"></i> @subitem.Name
-                           </NavLink>
-                    }
+                    <div class="collapse show" id="@item.Name">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
+                            @foreach (var subitem in item.SubItems)
+                            {
+                                <li><NavLink href="@subitem.LinkTo" class="link-dark rounded"> @subitem.Name</NavLink></li>
+                            }
+                        </ul>
+                    </div>
                 }
             </li>
         }
+
     </ul>
 </div>
 
+<!--<div class="b-example-divider"></div>-->
 @code {
     private bool collapseNavMenu = true;
 
     protected override async Task OnInitializedAsync()
     {
-       state.OnChange += StateHasChanged;
+        state.OnChange += StateHasChanged;
 
-      var lang = ((await localStorage.GetItemAsync<string>("lang")) ?? state.lang);
-      var langItems = await Http.GetStringAsync($"/ModelData/i18n/{lang}.json");
-      state.LangItems  = JsonConvert.DeserializeObject<Dictionary<string,string>>(langItems);
-      state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
+        var lang = ((await localStorage.GetItemAsync<string>("lang")) ?? state.lang);
+        var langItems = await Http.GetStringAsync($"/ModelData/i18n/{lang}.json");
+        state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
+        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
 
     }
 
