@@ -3,58 +3,80 @@
 @using Newtonsoft.Json
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager NavigationManager
 
-<div class="flex-shrink-0 p-3 bg-white sidemenu" style="width: 280px;" id="sidemenu">
 
-    
-    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-        <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-        <span class="fs-5 fw-semibold">Blazor Admin</span>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidemenu" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Sidebar</span>
     </a>
-    
-    <div class="btn-group btn-group-sm mb-5" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary btn-sm @(state.lang=="en"?"active":"")" @onclick='(() => ChangeLang("en"))'>English</button>
-        <button type="button" class="btn btn-secondary btn-sm @(state.lang=="tr"?"active":"")" @onclick='(() => ChangeLang("tr"))'>Türkçe</button>
-    </div>
-
-    <ul class="list-unstyled ps-0">
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
 
         @foreach (var item in state.MenuItems)
         {
-            <li class="mb-1">
 
-                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#@item.Name" aria-expanded="true">
+            <li class="nav-item">
+                <a href="#" class="nav-link" aria-current="page" data-bs-toggle="collapse" data-bs-target="#@item.Name.Replace(" ","")">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                     @item.Name
-                </button>
-
-
+                </a>
 
                 @if (item.SubItems != null)
                 {
-                    <div class="collapse show" id="@item.Name">
+                    <div class="collapse" id="@item.Name.Replace(" ","")">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-
                             @foreach (var subitem in item.SubItems)
                             {
-                                <li><NavLink href="@subitem.LinkTo" class="link-dark rounded"> @subitem.Name</NavLink></li>
+                                <li><NavLink ActiveClass="noclass" href="@subitem.LinkTo" class="link-dark rounded"> @subitem.Name</NavLink></li>
                             }
                         </ul>
                     </div>
                 }
+
             </li>
+
         }
 
     </ul>
 
+    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary btn-sm @(state.lang=="en"?"active":"")" @onclick='(() => ChangeLang("en"))'>EN</button>
+        <button type="button" class="btn btn-secondary btn-sm @(state.lang=="tr"?"active":"")" @onclick='(() => ChangeLang("tr"))'>TR</button>
+    </div>
+
+    <hr>
+    @if (state.user != null)
+    {
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="@state.user.ProfileImage" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>@state.user.Name</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" href="#">@state.Localized("NewProject")</a></li>
+                <li><a class="dropdown-item" href="#">@state.Localized("Settings")</a></li>
+                <li><a class="dropdown-item" href="#">@state.Localized("Profile")</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a @onclick="LogOut" class="dropdown-item" href="#">@state.Localized("Logout")</a></li>
+            </ul>
+        </div>
+    }
 
 </div>
 
-<!--<div class="b-example-divider"></div>-->
+
 @code {
     private bool collapseNavMenu = true;
 
     protected override async Task OnInitializedAsync()
     {
+        if (state.user == null)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+
         state.OnChange += StateHasChanged;
 
         var lang = ((await localStorage.GetItemAsync<string>("lang")) ?? state.lang);
@@ -62,6 +84,12 @@
         state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
         state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
 
+    }
+
+    private void LogOut()
+    {
+        state.user = null;
+        NavigationManager.NavigateTo("/login");
     }
 
     private async void ChangeLang(string lang)

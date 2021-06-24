@@ -15,6 +15,8 @@ namespace AdminApp.Services
     {
         private string savedString;
         private string _lang = "en";
+        public User user = null;
+
         public string lang
         {
 
