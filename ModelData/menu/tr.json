@@ -13,13 +13,13 @@
       },
       {
         "Name": "Counter",
-        "LinkTo": "/counter",
+        "LinkTo": "/AdminApp/counter",
         "Title": "Counter",
         "icon": "home"
       },
       {
         "Name": "Fetch Data",
-        "LinkTo": "/fetchdata",
+        "LinkTo": "/AdminApp/fetchdata",
         "Title": "Fetch Data",
         "icon": "home"
       }
