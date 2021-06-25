@@ -22,6 +22,12 @@
         "LinkTo": "/AdminApp/fetchdata",
         "Title": "Fetch Data",
         "icon": "home"
+      },
+      {
+        "Name": "Login",
+        "LinkTo": "/AdminApp/login",
+        "Title": "Login",
+        "icon": "home"
       }
     ]
   },
