@@ -30,9 +30,11 @@ namespace AdminApp.Services
 
                 _lang = value ?? "EN";
                 NotifyStateChanged();
-               
+
             }
         }
+
+        public List<BreadCrumbItem> BreadCrumbItems { get; set; } = new List<BreadCrumbItem>();
 
         public int currentCount;
         private Dictionary<string, string> _langItems = new Dictionary<string, string>();
@@ -54,7 +56,7 @@ namespace AdminApp.Services
 
         public string Localized(string key)
         {
-            if (key!=null && LangItems != null && LangItems.ContainsKey(key))
+            if (key != null && LangItems != null && LangItems.ContainsKey(key))
             {
                 return LangItems[key];
             }

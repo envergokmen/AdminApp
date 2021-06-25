@@ -1,0 +1,31 @@
+﻿@inject StateContainer state
+
+<div id="BreadCrumb">
+
+    <div id="Burger">
+      <i class="fa fa-bars"></i>
+    </div>
+
+    <div id="BreadCrumbLeftCon">
+      @foreach(var bread in items)
+        {
+            if (bread.Link == "") {
+             <span>
+                 @state.Localized(bread.Text)
+             </span>
+
+            } else {
+                <NavLink href=@bread.Link >
+                    @state.Localized(bread.Text)
+                </NavLink>
+            } 
+
+        }
+    </div>
+
+</div>
+
+@code {
+    [Parameter] public List<BreadCrumbItem> items { get; set; }
+
+}
