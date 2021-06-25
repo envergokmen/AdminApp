@@ -1,0 +1,118 @@
+﻿* {
+    line-height: normal;
+}
+
+#LoginRegisterCon {
+    min-height: 480px;
+    color: #5a5a5a;
+    margin-top: 70px;
+    max-width: 500px;
+}
+
+    #LoginRegisterCon a {
+        color: #5a5a5a;
+        text-decoration: underline;
+    }
+
+        #LoginRegisterCon a:visited {
+            color: #5a5a5a;
+            text-decoration: underline;
+        }
+
+        #LoginRegisterCon a:hover {
+            color: #2b2b2b;
+        }
+
+    #LoginRegisterCon p.ResetPassword {
+        padding: 20px 0 20px 0;
+    }
+
+    #LoginRegisterCon #LoginRegisterForm {
+        width: 100%;
+    }
+
+    #LoginRegisterCon h1 {
+        color: #5a5a5a;
+        font-size: 22px;
+        letter-spacing: 2px;
+        padding-left: 10px;
+    }
+
+    #LoginRegisterCon select {
+        color: #333;
+        padding: 8px 25px;
+        border: 1px solid #a2b5be;
+        border-radius: 25px;
+        text-decoration: none;
+        margin-top: 15px;
+        font-size: 20px;
+        outline: 0;
+        display: block;
+        width: 100%;
+    }
+
+    #LoginRegisterCon input[type=text], #LoginRegisterCon input[type=password] {
+        color: #333;
+        padding: 8px 25px;
+        border: 1px solid #a2b5be;
+        border-radius: 25px;
+        text-decoration: none;
+        margin-top: 15px;
+        font-size: 20px;
+        outline: 0;
+        display: block;
+        width: 100%;
+    }
+
+    #LoginRegisterCon button[type=submit] {
+        color: #333;
+        padding: 8px 25px;
+        border: 1px solid #a2b5be;
+        border-radius: 25px;
+        text-decoration: none;
+        margin-top: 15px;
+        font-size: 20px;
+        outline: 0;
+        display: block;
+        width: 100%;
+    }
+
+    #LoginRegisterCon input::placeholder {
+        color: #bebebe;
+        opacity: 1;
+    }
+
+    #LoginRegisterCon input:-ms-input-placeholder {
+        color: #bebebe;
+    }
+
+    #LoginRegisterCon input::-ms-input-placeholder {
+        color: #bebebe;
+    }
+
+    #LoginRegisterCon input:focus {
+        border: 1px solid #0099dc;
+    }
+
+    #LoginRegisterCon #LoginResult p {
+        margin: 0;
+        padding: 0;
+        font-size: 13px;
+    }
+
+    #LoginRegisterCon button[type=submit] {
+        border: none;
+        color: #f1f1f1;
+        background-image: linear-gradient(to top, #e30d0d, #f5003b, #ff0064, #ff008e, #f600b9);
+        max-width: 220px;
+    }
+
+        #LoginRegisterCon button[type=submit]:hover {
+            border: none;
+            color: #fff;
+            background-image: linear-gradient(to top, #f20000, #fc002e, #ff004d, #ff0069, #ff0085);
+        }
+
+    #LoginRegisterCon .form-check {
+        margin-top: 10px;
+    }
