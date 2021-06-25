@@ -10,6 +10,18 @@
         "LinkTo": "/",
         "Title": "Gösterge",
         "icon": "home"
+      },
+      {
+        "Name": "Counter",
+        "LinkTo": "/counter",
+        "Title": "Counter",
+        "icon": "home"
+      },
+      {
+        "Name": "Fetch Data",
+        "LinkTo": "/fetchdata",
+        "Title": "Fetch Data",
+        "icon": "home"
       }
     ]
   },
