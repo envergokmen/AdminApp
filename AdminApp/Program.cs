@@ -20,6 +20,16 @@ namespace AdminApp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
+            if (builder.HostEnvironment.IsDevelopment())
+            {
+                StateContainer.basePath = "";
+            }
+            else
+            {
+                StateContainer.basePath = "";
+            }
+
+
             var services = builder.Services;
 
             services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
@@ -27,6 +37,7 @@ namespace AdminApp
 
             services.AddBlazoredSessionStorage();
             services.AddBlazoredLocalStorage();
+
 
             await builder.Build().RunAsync();
         }

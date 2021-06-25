@@ -72,24 +72,26 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if (state.user == null)
+
+        if(state.user==null)
         {
-            NavigationManager.NavigateTo("/login");
+            NavigationManager.NavigateTo($"{StateContainer.basePath}/login");
+
         }
 
         state.OnChange += StateHasChanged;
 
         var lang = ((await localStorage.GetItemAsync<string>("lang")) ?? state.lang);
-        var langItems = await Http.GetStringAsync($"/ModelData/i18n/{lang}.json");
+        var langItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/i18n/{lang}.json");
         state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
-        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
+        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
 
     }
 
     private void LogOut()
     {
         state.user = null;
-        NavigationManager.NavigateTo("/login");
+        NavigationManager.NavigateTo($"{StateContainer.basePath}/login");
     }
 
     private async void ChangeLang(string lang)
@@ -97,8 +99,8 @@
         await localStorage.SetItemAsync("lang", lang);
         state.lang = lang;
 
-        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
-        var langItems = await Http.GetStringAsync($"/ModelData/i18n/{lang}.json");
+        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
+        var langItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/i18n/{lang}.json");
         state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
 
     }

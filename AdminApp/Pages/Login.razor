@@ -9,11 +9,7 @@
 <div id="LoginRegisterCon" class="container">
     <h1>@state.Localized("SignIn")</h1>
 
-    <EditForm Model="@loginModel" OnValidSubmit="@HandleValidSubmit" id="LoginRegisterForm">
-
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
+    <form id="LoginRegisterForm">
 
         <input class="block-level" id="UserName" name="UserName" placeholder="Username / Email" maxlength="90" type="text" />
         <input class="block-level" id="PassWord" name="PassWord" placeholder="Password" maxlength="30" type="password" />
@@ -23,27 +19,26 @@
             <label class="form-check-label" for="RememberMe">@state.Localized("RememberMe")</label>
         </div>
 
-        <button @onclick=SignIn type="submit" id="LoginButton">@state.Localized("SignIn")</button>
+        <button @onclick=SignIn href="@(StateContainer.basePath)" type="button" id="LoginButton">@state.Localized("SignIn")</button>
 
         <p class="ResetPassword">
             @state.Localized("HavingTrouble")
             <a href="/PasswordReset">@state.Localized("ResetYourPassword")</a>
         </p>
 
-    </EditForm>
+    </form>
 
 </div>
 
 @code {
 
-    private LoginModel loginModel = new();
+    private LoginModel loginModel = new LoginModel();
 
 
     private void SignIn()
     {
         state.user = new User();
-        NavigationManager.NavigateTo("/");
-
+        NavigationManager.NavigateTo($"{StateContainer.basePath}");
 
     }
 
@@ -57,15 +52,15 @@
     {
         if (state.user != null)
         {
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo($"{StateContainer.basePath}");
         }
 
         state.OnChange += StateHasChanged;
 
         var lang = ((await localStorage.GetItemAsync<string>("lang")) ?? state.lang);
-        var langItems = await Http.GetStringAsync($"/ModelData/i18n/{lang}.json");
+        var langItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/i18n/{lang}.json");
         state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
-        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"/ModelData/menu/{lang}.json");
+        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
 
     }
 }
