@@ -1,0 +1,118 @@
+[
+  {
+    "Name": "Gösterge",
+    "LinkTo": "/",
+    "Title": "Gösterge",
+    "icon": "home",
+    "SubItems": [
+      {
+        "Name": "Anasayfa",
+        "LinkTo": "/",
+        "Title": "Gösterge",
+        "icon": "home"
+      }
+    ]
+  },
+  {
+    "Name": "Form Elemanları",
+    "LinkTo": "/formelements/add",
+    "icon": "calendar",
+    "SubItems": [
+      {
+        "Name": "Tümü",
+        "LinkTo": "/formelements/add",
+        "icon": "plus"
+      },
+      {
+        "Name": "Form Doğrulama",
+        "LinkTo": "/formelements/validations",
+        "icon": "plus"
+      }
+    ]
+  },
+  {
+    "Name": "Listeler",
+    "LinkTo": "/formelements",
+    "icon": "headphones",
+    "SubItems": [
+      {
+        "Name": "Standard Liste",
+        "LinkTo": "/formelements",
+        "icon": "plus"
+      }
+    ]
+  },
+  {
+    "Name": "Tipografi",
+    "LinkTo": "/typographics",
+    "icon": "sitemap",
+    "SubItems": [
+      {
+        "Name": "Tümü",
+        "LinkTo": "/typographics",
+        "icon": "list-alt"
+      }
+    ]
+  },
+  {
+    "Name": "Bildirimler",
+    "LinkTo": "/notifications",
+    "Title": "Bildirimler",
+    "icon": "bell",
+    "SubItems": [
+      {
+        "Name": "Popup & Uyarilar",
+        "LinkTo": "/modals",
+        "icon": "plus"
+      }
+    ]
+  },
+  {
+    "Name": "Login",
+    "LinkTo": "/login",
+    "icon": "user"
+  },
+  {
+    "Name": "Kullanıcılar",
+    "LinkTo": "",
+    "icon": "user",
+    "SubItems": [
+      {
+        "Name": "Kullanıcı Listesi",
+        "LinkTo": "/generic",
+        "icon": "list-alt"
+      }
+    ]
+  },
+  {
+    "Name": "Promosyonlar",
+    "LinkTo": "/promotions",
+    "Title": "Promosyonlar",
+    "icon": "star",
+    "SubItems": [
+      {
+        "Name": "Bannerları Yönet",
+        "LinkTo": "/sliders",
+        "icon": "image"
+      },
+      {
+        "Name": "Kategori Yönet",
+        "LinkTo": "/categories",
+        "icon": "sitemap"
+      }
+    ]
+  },
+  {
+    "Name": "Raporlar",
+    "LinkTo": "/reports",
+    "Title": "Raporlar",
+    "icon": "chart-pie",
+    "SubItems": [
+      {
+        "Name": "Satış Raporları",
+        "LinkTo": "/reports/sale",
+        "icon": "chart-pie"
+      }
+    ]
+  }
+]
