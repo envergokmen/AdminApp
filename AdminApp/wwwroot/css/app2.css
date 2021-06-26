@@ -162,12 +162,7 @@ main {
     margin-left: 1.25rem;
     text-decoration: none;
 }
-
-    .btn-toggle-nav a:hover,
-    .btn-toggle-nav a:focus {
-        background-color: #d2f4ea;
-    }
-
+ 
 .scrollarea {
     overflow-y: auto;
 }
@@ -196,29 +191,43 @@ main {
 .sidemenu {
     -webkit-box-shadow: 7px 9px 17px -3px rgba(0,0,0,0.15);
     box-shadow: 7px 9px 17px -3px rgba(0,0,0,0.15);
-    margin-right: 40px;
+    /*margin-right: 40px;*/
     height:100vh;
 }
 
     .sidemenu .rounded {
-        padding-left: 20px;
+        padding:10px 10px 10px 20px;
         width: 90%;
-        color: wheat;
+        color: #ccc;
+
     }
-    .sidemenu .rounded:hover {
-       background-color:#171717;
-    }
+        .sidemenu .rounded:hover, .sidemenu .rounded:active, .sidemenu .rounded:focus, .sidemenu .rounded.active {
+            background-color: #171717;
+            color: white;
+        }
 
 .sidemenu .btn{
     width:100%;
 }
 
-.nav-link, .nav-link:visited
-{
-    color:white;
-}
-
-
-    .nav-link, .nav-link:visited {
+    .sidemenu .nav-link, .sidemenu .nav-link:visited {
         color: white;
+    }
+
+
+        .sidemenu .nav-link, .sidemenu .nav-link:visited {
+            color: white;
+        }
+
+
+            .sidemenu .nav-link:hover, .sidemenu .nav-link:focus, .sidemenu .nav-link:active {
+                background-color: #171717;
+            }
+
+    .sidemenu h1 {
+        height: 0;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        padding: 0;
+        margin: 5px;
     }

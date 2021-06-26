@@ -51,12 +51,12 @@
   },
   {
     "Name": "Listeler",
-    "LinkTo": "/formelements",
+    "LinkTo": "/lists",
     "icon": "headphones",
     "SubItems": [
       {
         "Name": "Standard Liste",
-        "LinkTo": "/formelements",
+        "LinkTo": "/lists",
         "icon": "plus"
       }
     ]

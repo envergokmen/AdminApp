@@ -18,6 +18,23 @@ namespace AdminApp.Services
 
         public User user = null;
         public static string basePath = "";
+        private ProductResult _productResult;
+
+        public ProductResult ProductResult
+        {
+
+            get
+            {
+                return _productResult;
+            }
+
+            set
+            {
+
+                _productResult = value;
+                NotifyStateChanged();
+            }
+        }
 
         public string lang
         {
@@ -36,11 +53,39 @@ namespace AdminApp.Services
             }
         }
 
-        public List<BreadCrumbItem> BreadCrumbItems { get; set; } =  new List<BreadCrumbItem>
+        private List<BreadCrumbItem> _breadCrumbItems = new List<BreadCrumbItem>
         {
-             new BreadCrumbItem{ Link="", Text="Home"}
+             new BreadCrumbItem{ Link = "/", Text= "Home"}
         };
 
+        public List<BreadCrumbItem> BreadCrumbItems
+        {
+
+            get
+            {
+                return _breadCrumbItems;
+            }
+
+            set
+            {
+
+                _breadCrumbItems = value;
+                NotifyBreadCrumbChanged();
+            }
+        }
+
+        public void AddBreadCrumbItem(BreadCrumbItem item)
+        {
+            if (item == null) return;
+            if (_breadCrumbItems == null) _breadCrumbItems = new List<BreadCrumbItem>();
+
+            if(!_breadCrumbItems.Any(x=>x.Link==item.Link && x.Text==item.Text))
+            {
+                _breadCrumbItems.Add(item);
+                NotifyBreadCrumbChanged();
+            }
+
+        }
 
         public int currentCount;
         private Dictionary<string, string> _langItems = new Dictionary<string, string>();
@@ -67,7 +112,7 @@ namespace AdminApp.Services
                 return LangItems[key];
             }
 
-            return "";
+            return key;
 
         }
 
@@ -136,10 +181,14 @@ namespace AdminApp.Services
         public void Dispose() => timer.Dispose();
 
         public event Action OnChange;
+        public event Action OnBreadCrumbChange;
         public event Action OnTimerChange;
 
 
         private void NotifyStateChanged() => OnChange?.Invoke();
+        private void NotifyBreadCrumbChanged() => OnBreadCrumbChange?.Invoke();
+
+
         private void NotifyTimerChanged() => OnTimerChange?.Invoke();
 
 

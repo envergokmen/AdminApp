@@ -1,0 +1,73 @@
+{
+
+  "searchKeyWord": null,
+  "page": 1,
+  "pageSize": 10,
+  "totalItem": 570,
+  "totalPage": 57,
+  "items": [
+    {
+      "_id": "5d84ae616a372666d1b3bd4e",
+      "name": "Iphone 10x",
+      "price": "$899.00",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/61nlT53kRKL._AC_SL1500_.jpg",
+      "isActive": true
+    },
+    {
+      "_id": "5d84ae0414d92b66b45388b6",
+      "name": "Samsung Note 10",
+      "price": "$840.00",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/61RhnuG-yML._AC_SL1500_.jpg",
+      "isActive": true
+    },
+    {
+      "_id": "5d8405e3385f47601ab6c99c",
+      "name": "Huawei P30 Lite 128 GB",
+      "price": "$279.00",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/61ichz%2BYnFL._AC_SL1000_.jpg",
+      "isActive": true
+    },
+    {
+      "_id": "5d84ae616a372666d1b3bd4e",
+      "name": "Iphone 10x",
+      "price": "$899.00",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/61nlT53kRKL._AC_SL1500_.jpg",
+      "isActive": false
+    },
+    {
+      "_id": "5d84ae0414d92b66b45388b6",
+      "name": "Samsung Note 10",
+      "price": "$840.00",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/61RhnuG-yML._AC_SL1500_.jpg",
+      "isActive": true
+    },
+    {
+      "_id": "5d8405e3385f47601ab6c99c",
+      "name": "Huawei P30 Lite 128 GB",
+      "price": "$279.00",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/61ichz%2BYnFL._AC_SL1000_.jpg",
+      "isActive": true
+    },
+    {
+      "_id": "5d84ae616a372666d1b3bd4e",
+      "name": "Iphone 10x",
+      "price": "$899.00",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/61nlT53kRKL._AC_SL1500_.jpg",
+      "isActive": false
+    },
+    {
+      "_id": "5d84ae0414d92b66b45388b6",
+      "name": "Samsung Note 10",
+      "price": "$840.00",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/61RhnuG-yML._AC_SL1500_.jpg",
+      "isActive": true
+    },
+    {
+      "_id": "5d8405e3385f47601ab6c99c",
+      "name": "Huawei P30 Lite 128 GB",
+      "price": "$279.00",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/61ichz%2BYnFL._AC_SL1000_.jpg",
+      "isActive": true
+    }
+  ]
+}

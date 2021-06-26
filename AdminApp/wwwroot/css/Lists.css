@@ -1,0 +1,181 @@
+﻿#MainListArea {
+    padding: 20px;
+}
+
+    #MainListArea > .btn {
+        margin-right: 3px;
+    }
+
+.PStatus {
+    text-align: center;
+}
+
+.thumbHolder img {
+    max-width: 80px;
+    max-height: 80px;
+    margin: 10px;
+}
+
+.StatusText {
+    display: block;
+    font-size: 13px;
+    float: left;
+    margin: 7px 0 0 0;
+}
+
+.NoListItem {
+    padding: 20px;
+    border: 1px dashed #ccc;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.ListingTable {
+    margin-top: 20px;
+}
+
+    .ListingTable .Status {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        background-color: #aaaaaa;
+        border: 1px solid #aaaaaa;
+        display: inline-block;
+        margin: 10px 5px 0 0;
+        float: none;
+    }
+
+        .ListingTable .Status.Active {
+            background-color: chartreuse;
+            border: 1px solid #64c900;
+            box-shadow: 0px 0px 8px -2px #40ff00;
+        }
+
+    .ListingTable .thumbHolder {
+        text-align: center;
+    }
+
+    .ListingTable .Id {
+        width: 120px;
+        color: #9b9b9b;
+    }
+
+    .ListingTable .Operations {
+        width: 170px;
+        min-width: 150px;
+        margin-right: 5px;
+    }
+
+        .ListingTable .Operations > a {
+            margin-right: 5px;
+        }
+
+        .ListingTable .Operations .text {
+            display: block;
+        }
+
+        .ListingTable .Operations .icon {
+            display: none;
+        }
+
+    .ListingTable th,
+    .ListingTable td {
+        border: none;
+    }
+
+    .ListingTable th {
+        font-weight: normal;
+        color: grey;
+    }
+
+        .ListingTable th:first-child {
+            border-radius: 10px 0 0 0;
+        }
+
+        .ListingTable th:last-child {
+            border-radius: 0 10px 0 0;
+        }
+
+    .ListingTable tr:last-child td:first-child {
+        border-radius: 0 0 0 10px;
+    }
+
+    .ListingTable tr:last-child td:last-child {
+        border-radius: 0 0 10px 0;
+    }
+
+.LoadMore {
+    width: 300px;
+}
+
+.col-form-label img {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+    .ListingTable {
+        font-size: 0.8em;
+    }
+
+        .ListingTable .Operations {
+            min-width: 110px !important;
+        }
+
+        .ListingTable .thumbHolder {
+            width: auto;
+            height: auto;
+            min-width: 0;
+            min-height: 0;
+        }
+
+            .ListingTable .thumbHolder img {
+                max-width: 60px;
+                max-height: 60px;
+                margin: 5px;
+            }
+
+        .ListingTable .StatusText {
+            display: none;
+        }
+}
+
+@media only screen and (max-width: 480px) {
+    .ListingTable .Operations .text {
+        display: none;
+    }
+
+    .ListingTable .Operations .icon {
+        display: block;
+    }
+}
+
+
+#SearchBox {
+    display: block;
+    float: right;
+    margin-top: 0;
+    margin-right: 5px;
+    position: relative;
+    max-width: 100%;
+}
+
+    #SearchBox input {
+        padding: 5px 17px;
+        border-radius: 0;
+        display: block;
+        width: auto;
+        margin-right: 3px;
+        max-width: 100%;
+        border-radius: 5px;
+        margin: 0;
+    }
+
+    #SearchBox #SubmitSearch {
+        background: none;
+        color: #c9c9c9;
+        display: block;
+        position: absolute;
+        border: none;
+        top: 7px;
+        right: 6px;
+    }

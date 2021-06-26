@@ -1,0 +1,173 @@
+﻿@inject StateContainer state
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@page "/lists"
+
+<div>
+    <div id="MainListArea">
+        <div class="row">
+            <div class="col-5">
+                <NavLink href="/formelements/add" class="btn btn-primary">
+                    <span class="hide-sm">@state.Localized("AddNewFormElement")</span>
+                    <span class="hide-md">+</span>
+                </NavLink>
+            </div>
+
+            <div class="col-7">
+
+                <div id="SearchBox">
+                    <form onSubmit={this.handleSearchSumbit.bind(this)}>
+                        <input placeholder="@state.Localized("TypeToSearch")"
+                               type="text" name="searchKeyWord"
+                               class="form-control" value="" />
+                        <button id="SubmitSearch">
+                            <i class="fa fa-search" />
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        @if (state.ProductResult == null || state.ProductResult.items == null || !state.ProductResult.items.Any())
+        {
+            <div class="NoListItem">
+                <p>{this.props.language.resource['NoListItem']}</p>
+                <NavLink href="/formelements/add" class="btn btn-primary">
+                    <span class="hide-sm">@state.Localized("AddNewFormElement")</span>
+                    <span class="hide-md">+</span>
+                </NavLink>
+            </div>
+        }
+        else
+        {
+
+            <table class="table table-striped ListingTable">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="percent20 text-center">@state.Localized("Image")</th>
+                        <th class="percent30 percent45-xs">@state.Localized("Name")</th>
+                        <th class="percent15 hide-sm">@state.Localized("Price")</th>
+                        <th class="hide-sm text-center">
+                            @state.Localized("Status")
+                        </th>
+                        <th class="Operations">
+                            @state.Localized("Operations")
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in state.ProductResult.items)
+                    {
+
+                        <tr class="@(item.isActive == true ? "" : "text-muted line-through")">
+                            <td>
+                                <div class="thumbHolder">
+                                    <img src=@item.image alt="" />
+                                </div>
+                            </td>
+                            <td>@item.name</td>
+                            <td class="hide-sm">@item.price</td>
+                            <td class="PStatus hide-sm text-center">
+                                <span class="@(item.isActive ? "Status Active" : "Status Passive")"></span>
+                            </td>
+                            <td class="Operations">
+                                <NavLink href="/formelements/add" class="btn btn-sm btn-warning">
+                                    <span class="text">@state.Localized("Edit")</span>
+                                    <span class="icon">
+                                        <i class="fa fa-edit" />
+                                    </span>
+                                </NavLink>
+
+                                <button id=@item._id name="@item.name"  @onclick="() => Delete(item.name, item._id)" class="btn btn-sm btn-danger">
+                                    <span class="text">@state.Localized("Delete")</span>
+                                    <span class="icon">
+                                        <i class="fa fa-trash-alt" />
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+
+            <div class="text-center">
+                @if (state.ProductResult.page > 1)
+                {
+                    <button onClick={this.PrevPage.bind(this)} class="btn btn-success LoadMore margin-right-10">
+                        ‹ @state.Localized("Prev")
+                    </button>
+
+                }
+
+                @if (state.ProductResult.totalPage > 0)
+                {
+                    <button onClick={this.NextPage.bind(this)} class="btn btn-success LoadMore">
+                        @state.Localized("Next") 1 / @state.ProductResult.totalPage ›
+                    </button>
+                }
+
+
+            </div>
+        }
+
+
+        <Modal @ref="modal">
+            <Title>
+              @state.Localized("ConfirmDelete")
+            </Title>
+            <Body>
+                <strong>@name</strong> 
+                @state.Localized("WillBeDeleted")
+            </Body>
+            <Footer>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"  @onclick="Confirm">
+                    @state.Localized("Confirm")
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => modal.Close()">
+                    @state.Localized("Cancel")
+                </button>
+            </Footer>
+        </Modal>
+
+    </div>
+</div>
+
+@using Newtonsoft.Json
+
+@code {
+
+    private Modal modal { get; set; }
+    public string name { get; set; }
+    public string id { get; set; }
+
+
+    private async void Delete(string _name, string _id)
+    {
+        name = _name;
+        id = _id;
+        modal.Open();
+    }
+
+
+    private async void Confirm()
+    {
+        state.ProductResult.items = state.ProductResult?.items.Where(x => x._id != id).ToArray();
+        StateHasChanged();
+        modal.Close();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        state.OnChange += StateHasChanged;
+
+        var ProductResult = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/products.json");
+        state.ProductResult = JsonConvert.DeserializeObject<ProductResult>(ProductResult);
+
+    }
+
+
+}

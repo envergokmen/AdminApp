@@ -3,13 +3,10 @@
 @if (state.BreadCrumbItems != null && state.BreadCrumbItems.Any())
 {
     <div id="BreadCrumb">
-        <div id="Burger">
-            <i class="fa fa-bars"></i>
-        </div>
         <div id="BreadCrumbLeftCon">
             @foreach (var bread in state.BreadCrumbItems)
             {
-                if (bread.Link == "")
+                if (bread.Link ==null || bread.Link == "")
                 {
                     <span>
                         @state.Localized(bread.Text)
@@ -27,3 +24,10 @@
     </div>
 }
 
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        state.OnBreadCrumbChange += StateHasChanged;
+    }
+}

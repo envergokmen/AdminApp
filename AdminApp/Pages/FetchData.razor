@@ -41,11 +41,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-        state.BreadCrumbItems = new List<BreadCrumbItem>
-        {
-             new BreadCrumbItem{ Link="", Text="Home"}
-        };
-
+        state.AddBreadCrumbItem(new BreadCrumbItem { Link = "/fetchdata", Text = "Fetch Data" });
     }
 
     public class WeatherForecast

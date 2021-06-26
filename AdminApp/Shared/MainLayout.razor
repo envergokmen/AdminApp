@@ -6,15 +6,14 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 <div class="page">
 
-   
-  <NavMenu />
 
+    <NavMenu />
     <div class="main">
 
-     <BreadCrumb />
-
-     @Body
-
+        <BreadCrumb />
+        <div class="main-content">
+            @Body
+        </div>
     </div>
 </div>
 

@@ -54,10 +54,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if (state.user != null)
-        {
-            NavigationManager.NavigateTo($"{StateContainer.basePath}");
-        }
+        //if (state.user != null)
+        //{
+        //    NavigationManager.NavigateTo($"{StateContainer.basePath}");
+        //}
 
         state.OnChange += StateHasChanged;
 
