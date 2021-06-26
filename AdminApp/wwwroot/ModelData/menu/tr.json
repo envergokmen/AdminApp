@@ -28,6 +28,7 @@
         "LinkTo": "/login",
         "Title": "Login",
         "icon": "home"
+       
       }
     ]
   },
@@ -88,7 +89,19 @@
   {
     "Name": "Login",
     "LinkTo": "/login",
-    "icon": "user"
+    "icon": "user",
+    "SubItems": [
+      {
+        "Name": "Giriş",
+        "LinkTo": "/login",
+        "icon": "user"
+      },
+      {
+        "Name": "Çıkış",
+        "LinkTo": "/Logout",
+        "icon": "user"
+      }
+    ]
   },
   {
     "Name": "Kullanıcılar",

@@ -65,9 +65,8 @@
     }
 
     #LoginRegisterCon button[type=submit], #LoginRegisterCon button[type=button] {
-        color: #333;
+        color: white;
         padding: 8px 25px;
-        border: 1px solid #a2b5be;
         border-radius: 25px;
         text-decoration: none;
         margin-top: 15px;

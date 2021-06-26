@@ -27,7 +27,14 @@
         "Name": "Login",
         "LinkTo": "/login",
         "Title": "Login",
-        "icon": "home"
+        "icon": "home",
+        "SubItems": [
+          {
+            "Name": "Login",
+            "LinkTo": "/login",
+            "icon": "user"
+          }
+        ]
       }
     ]
   },
@@ -88,7 +95,14 @@
   {
     "Name": "Login",
     "LinkTo": "/login",
-    "icon": "user"
+    "icon": "user",
+    "SubItems": [
+      {
+        "Name": "Login",
+        "LinkTo": "/login",
+        "icon": "user"
+      }
+    ]
   },
   {
     "Name": "Users",

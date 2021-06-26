@@ -3,6 +3,8 @@
 @using Newtonsoft.Json
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject Blazored.SessionStorage.ISessionStorageService  sessionStorage
+
 @inject NavigationManager NavigationManager
 
 
@@ -25,11 +27,11 @@
 
                 @if (item.SubItems != null)
                 {
-                    <div class="collapse" id="@item.Name.Replace(" ","")">
+                    <div class="collapse  @(item.Name==openMenu?"show":"")" id="@item.Name.Replace(" ","")">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             @foreach (var subitem in item.SubItems)
                             {
-                                <li><NavLink ActiveClass="noclass" href="@subitem.LinkTo" class="link-dark rounded"> @subitem.Name</NavLink></li>
+                                <li><NavLink @onclick='(() => SetOpenMenu(item.Name))' ActiveClass="noclass" href="@subitem.LinkTo" class="link-dark rounded"> @subitem.Name</NavLink></li>
                             }
                         </ul>
                     </div>
@@ -69,11 +71,18 @@
 
 @code {
     private bool collapseNavMenu = true;
+    private string openMenu = "";
 
     protected override async Task OnInitializedAsync()
     {
 
-        if(state.user==null)
+        var user = (await localStorage.GetItemAsync<string>("user"));
+        if (user != null)
+        {
+            state.user = JsonConvert.DeserializeObject<User>(user);
+        }
+
+        if (state.user == null)
         {
             NavigationManager.NavigateTo($"{StateContainer.basePath}/login");
 
@@ -82,26 +91,54 @@
         state.OnChange += StateHasChanged;
 
         var lang = ((await localStorage.GetItemAsync<string>("lang")) ?? state.lang);
-        var langItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/i18n/{lang}.json");
+
+        var langItems = await localStorage.GetItemAsStringAsync("langItems");
+        var menuItems = await sessionStorage.GetItemAsStringAsync("menuItems");
+
+        if (langItems == null || menuItems == null)
+        {
+            langItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/i18n/{lang}.json");
+            menuItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
+        }
+
         state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
-        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
+        state.MenuItems = JsonConvert.DeserializeObject<List<MenuItem>>(menuItems);
+
+        await localStorage.SetItemAsStringAsync("langItems", JsonConvert.SerializeObject(state.LangItems));
+        await sessionStorage.SetItemAsStringAsync("menuItems", JsonConvert.SerializeObject(state.MenuItems));
 
     }
 
-    private void LogOut()
+    private async void LogOut()
     {
         state.user = null;
+        await localStorage.RemoveItemAsync("user");
+        await sessionStorage.RemoveItemAsync("menuItems");
+        await localStorage.RemoveItemAsync("langItems");
+
         NavigationManager.NavigateTo($"{StateContainer.basePath}/login");
     }
+
+    private void SetOpenMenu(string menuName)
+    {
+        openMenu = menuName;
+    }
+
 
     private async void ChangeLang(string lang)
     {
         await localStorage.SetItemAsync("lang", lang);
         state.lang = lang;
 
-        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
         var langItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/i18n/{lang}.json");
+        var menuItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
+
         state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
+        state.MenuItems = JsonConvert.DeserializeObject<List<MenuItem>>(menuItems);
+
+        await localStorage.SetItemAsStringAsync("langItems", JsonConvert.SerializeObject(state.LangItems));
+        await localStorage.SetItemAsStringAsync("menuItems", JsonConvert.SerializeObject(state.MenuItems));
+
 
     }
 

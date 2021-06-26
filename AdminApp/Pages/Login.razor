@@ -5,6 +5,7 @@
 @inject HttpClient Http
 @using Newtonsoft.Json
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject Blazored.SessionStorage.ISessionStorageService  sessionStorage
 
 <div id="LoginRegisterCon" class="container">
     <h1>@state.Localized("SignIn")</h1>
@@ -13,13 +14,15 @@
 
         <input class="block-level" id="UserName" name="UserName" placeholder="Username / Email" maxlength="90" type="text" />
         <input class="block-level" id="PassWord" name="PassWord" placeholder="Password" maxlength="30" type="password" />
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="RememberMe" name="RememberMe" checked="">
 
-            <label class="form-check-label" for="RememberMe">@state.Localized("RememberMe")</label>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="RememberMe">
+            <label class="form-check-label" for="RememberMe">
+                @state.Localized("RememberMe")
+            </label>
         </div>
 
-        <button @onclick=SignIn href="@(StateContainer.basePath)" type="button" id="LoginButton">@state.Localized("SignIn")</button>
+        <button @onclick=SignIn type="button" id="LoginButton">@state.Localized("SignIn")</button>
 
         <p class="ResetPassword">
             @state.Localized("HavingTrouble")
@@ -35,9 +38,10 @@
     private LoginModel loginModel = new LoginModel();
 
 
-    private void SignIn()
+    private async void SignIn()
     {
         state.user = new User();
+        await localStorage.SetItemAsStringAsync("user", JsonConvert.SerializeObject(state.user));
         NavigationManager.NavigateTo($"{StateContainer.basePath}");
 
     }
@@ -58,9 +62,21 @@
         state.OnChange += StateHasChanged;
 
         var lang = ((await localStorage.GetItemAsync<string>("lang")) ?? state.lang);
-        var langItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/i18n/{lang}.json");
+
+        var langItems = await localStorage.GetItemAsStringAsync("langItems");
+        var menuItems = await sessionStorage.GetItemAsStringAsync("menuItems");
+
+        if (langItems == null || menuItems == null)
+        {
+            langItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/i18n/{lang}.json");
+            menuItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
+        }
+
         state.LangItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(langItems);
-        state.MenuItems = await Http.GetFromJsonAsync<List<MenuItem>>($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
+        state.MenuItems = JsonConvert.DeserializeObject<List<MenuItem>>(menuItems);
+
+        await localStorage.SetItemAsStringAsync("langItems", JsonConvert.SerializeObject(state.LangItems));
+        await sessionStorage.SetItemAsStringAsync("menuItems", JsonConvert.SerializeObject(state.MenuItems));
 
     }
 }
