@@ -1,5 +1,6 @@
 ﻿@page "/fetchdata"
 @inject HttpClient Http
+@inject StateContainer state
 
 <h1>Weather forecast</h1>
 
@@ -40,6 +41,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        state.BreadCrumbItems = new List<BreadCrumbItem>
+        {
+             new BreadCrumbItem{ Link="", Text="Home"}
+        };
+
     }
 
     public class WeatherForecast

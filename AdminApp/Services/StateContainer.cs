@@ -36,7 +36,11 @@ namespace AdminApp.Services
             }
         }
 
-        public List<BreadCrumbItem> BreadCrumbItems { get; set; } = new List<BreadCrumbItem>();
+        public List<BreadCrumbItem> BreadCrumbItems { get; set; } =  new List<BreadCrumbItem>
+        {
+             new BreadCrumbItem{ Link="", Text="Home"}
+        };
+
 
         public int currentCount;
         private Dictionary<string, string> _langItems = new Dictionary<string, string>();

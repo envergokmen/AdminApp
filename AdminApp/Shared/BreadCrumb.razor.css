@@ -1,0 +1,166 @@
+﻿@charset "UTF-8";
+
+#BreadCrumb {
+    padding: 0 10px 11px 10px;
+    background-color: #ececec;
+    color: #5c5c5c;
+    font-size: 14px;
+    min-height: 40px;
+}
+
+    #BreadCrumb #BreadCrumbLeftCon {
+        display: none;
+    }
+
+    #BreadCrumb #BreadCrumbLeftCon {
+        display: inline-block;
+        margin: 10px 10px 0 10px;
+    }
+
+        #BreadCrumb #BreadCrumbLeftCon a {
+            padding-top: 5px;
+        }
+
+            #BreadCrumb #BreadCrumbLeftCon a::after {
+                content: "›";
+                margin: 0 8px 0 8px;
+                display: inline-block;
+            }
+
+        #BreadCrumb #BreadCrumbLeftCon span::after {
+            content: "›";
+            margin: 0 8px 0 8px;
+            display: inline-block;
+        }
+
+        #BreadCrumb #BreadCrumbLeftCon span:last-child::after {
+            content: none;
+            margin: 0;
+            display: inline;
+        }
+
+    #BreadCrumb .lang-btn {
+        padding: 3px 8px;
+        font-size: 12px;
+        margin: 6px 4px 0 0;
+    }
+
+        #BreadCrumb .lang-btn.btn-primary {
+            background-color: #d5e2e8;
+            border-color: #d5e2e8;
+            color: #3a3a3a;
+        }
+
+        #BreadCrumb .lang-btn:hover {
+            background-color: #57c6e6;
+        }
+
+    #BreadCrumb #UserContainer {
+        padding: 5px 5px 0 5px;
+    }
+
+        #BreadCrumb #UserContainer span {
+            display: inline-block;
+            margin-top: 6px;
+            margin-right: 5px;
+        }
+
+    #BreadCrumb .lightdropdown {
+        border: none;
+    }
+
+        #BreadCrumb .lightdropdown > button {
+            border: none;
+            background-color: transparent;
+            color: #101113;
+            padding: 0.175rem 0.55rem;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+            #BreadCrumb .lightdropdown > button > span > span {
+                margin-right: 10px;
+            }
+
+            #BreadCrumb .lightdropdown > button > button {
+                padding: 0.175rem 0.55rem;
+                font-size: 13px;
+                margin-top: 7px;
+            }
+
+    #BreadCrumb #LogOutLink {
+        padding: 3px 8px;
+        margin-left: 10px;
+        font-size: 12px;
+        margin-top: -2px;
+        margin-right: 0;
+    }
+
+        #BreadCrumb #LogOutLink:hover {
+            background-color: #b1133d;
+            color: white;
+        }
+
+@media only screen and (max-width: 980px) {
+    #BreadCrumb #BreadCrumbLeftCon span:first-child {
+        display: none;
+    }
+
+    #BreadCrumb #BreadCrumbLeftCon :nth-child(1),
+    #BreadCrumb #BreadCrumbLeftCon :nth-child(3) {
+        display: none;
+    }
+
+    #BreadCrumb #BreadCrumbLeftCon a::after {
+        content: none;
+    }
+
+    #BreadCrumb #UserContainer {
+        letter-spacing: -1px;
+    }
+
+        #BreadCrumb #UserContainer span.text-black-50 {
+            display: none !important;
+        }
+
+    #BreadCrumb {
+        height: 50px;
+    }
+
+        #BreadCrumb #Burger svg {
+            font-size: 29px;
+            margin-top: 7px;
+        }
+
+        #BreadCrumb #UserContainer {
+            padding: 9px 5px 0 5px;
+        }
+
+        #BreadCrumb .lightdropdown > button {
+            margin-top: 11px;
+        }
+
+        #BreadCrumb #BreadCrumbLeftCon {
+            margin: 15px 10px 0 46px;
+        }
+
+        #BreadCrumb #UserContainer span.text-black-50 {
+            display: none !important;
+        }
+}
+
+@media only screen and (max-width: 767px) {
+    #BreadCrumb #UserContainer #LogOutLink {
+        margin-top: 5px;
+    }
+
+    #BreadCrumb #UserContainer span {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 410px) {
+    #BreadCrumb #BreadCrumbLeftCon {
+        display: none;
+    }
+}
