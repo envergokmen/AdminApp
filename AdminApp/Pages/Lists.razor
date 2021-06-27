@@ -32,7 +32,7 @@
         @if (state.ProductResult == null || state.ProductResult.items == null || !state.ProductResult.items.Any())
         {
             <div class="NoListItem">
-                <p>{this.props.language.resource['NoListItem']}</p>
+                <p>@state.Localized("NoListItem")</p>
                 <NavLink href="/formelements/add" class="btn btn-primary">
                     <span class="hide-sm">@state.Localized("AddNewFormElement")</span>
                     <span class="hide-md">+</span>
