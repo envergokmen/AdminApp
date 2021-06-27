@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace AdminApp
 {
@@ -42,13 +43,16 @@ namespace AdminApp
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress),
             });
 
-            services.AddScoped<StateContainer>();
 
+            services.AddLocalization();
+            services.AddScoped<StateContainer>();
             services.AddBlazoredSessionStorage();
             services.AddBlazoredLocalStorage();
 
+            var host = builder.Build();
+            await host.SetDefaultLang();
 
-            await builder.Build().RunAsync();
+            await host.RunAsync();
         }
     }
 }

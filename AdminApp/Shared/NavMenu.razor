@@ -1,14 +1,11 @@
 ﻿@inject HttpClient Http
 @inject StateContainer state
 @using Newtonsoft.Json
-@inject HttpClient Http
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject Blazored.SessionStorage.ISessionStorageService  sessionStorage
 
 @inject NavigationManager NavigationManager
-
-
-
+@using System.Globalization
 
 <div class="d-flex flex-column flex-shrink-0 text-white bg-dark sidemenu" style="width: 280px;">
 
@@ -16,7 +13,7 @@
         <svg class="bi me-2" width="20" height="18"><use xlink:href="#bootstrap"></use></svg>
         <span class="fs-6">BLZ ADMIN</span>
     </NavLink>
-   
+
     <div class="p-3">
         <ul class="nav nav-pills flex-column mb-auto">
 
@@ -52,7 +49,7 @@
             <button type="button" class="btn btn-secondary btn-sm @(state.lang=="tr"?"active":"")" @onclick='(() => ChangeLang("tr"))'>TR</button>
         </div>
 
-        <hr>
+        <hr />
         @if (state.user != null)
         {
             <div class="dropdown">
@@ -98,6 +95,14 @@
 
         var lang = ((await localStorage.GetItemAsync<string>("lang")) ?? state.lang);
 
+
+        var cultureInfo = new System.Globalization.CultureInfo(lang.ToLower() == "tr" ? "tr-TR" : "en-US");
+
+        await localStorage.SetItemAsync("BlazorCulture", lang.ToLower() == "tr" ? "tr-TR" : "en-US");
+
+        CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+        CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
         var langItems = await localStorage.GetItemAsStringAsync("langItems");
         var menuItems = await sessionStorage.GetItemAsStringAsync("menuItems");
 
@@ -136,6 +141,12 @@
     {
         await localStorage.SetItemAsync("lang", lang);
         state.lang = lang;
+
+        var cultureInfo = new System.Globalization.CultureInfo(lang.ToLower() == "tr" ? "tr-TR" : "en-US");
+        await localStorage.SetItemAsync("BlazorCulture", lang.ToLower() == "tr" ? "tr-TR" : "en-US");
+
+        CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+        CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
         var langItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/i18n/{lang}.json");
         var menuItems = await Http.GetStringAsync($"{StateContainer.basePath}/ModelData/menu/{lang}.json");
