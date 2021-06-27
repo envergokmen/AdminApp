@@ -61,6 +61,15 @@ namespace Lng {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {

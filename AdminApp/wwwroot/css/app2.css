@@ -19,15 +19,26 @@ a, .btn-link {
 }
 
 .valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
+    border: 1px solid #9fcfae;
 }
-
+.validation-errors{
+    list-style:none;
+    padding-left:0;
+    padding:10px;
+    border-radius:8px;
+}
 .invalid {
-    outline: 1px solid red;
+    border: 1px solid red;
 }
-
+input.invalid {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 .validation-message {
-    color: red;
+    color: #c74242;
+    background-color: #f7b8b8;
+    padding: 2px 15px;
+    font-size: 13px;
 }
 
 #blazor-error-ui {
