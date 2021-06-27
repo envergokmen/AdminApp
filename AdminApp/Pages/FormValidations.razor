@@ -14,7 +14,7 @@
 <div class="container">
 
     <div class="py-5 text-center">
-        <h2>Form Validations</h2>
+        <h2>@state.Localized("FormValidations")</h2>
     </div>
 
     @Lng.App.Required<br />
@@ -56,13 +56,9 @@
     {
 
         state.OnChange += StateHasChanged;
-
         var lang = ((await localStorage.GetItemAsync<string>("lang")) ?? state.lang);
         curLang = lang;
-        var cultureInfo = new System.Globalization.CultureInfo(lang.ToLower() == "tr" ? "tr-TR" : "en-US");
 
-        CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-        CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 
     }
