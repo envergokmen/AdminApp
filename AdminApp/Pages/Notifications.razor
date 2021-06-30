@@ -1,0 +1,143 @@
+﻿@page "/notifications"
+
+
+@inject HttpClient Http
+@inject StateContainer state
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject Blazored.SessionStorage.ISessionStorageService  sessionStorage
+
+
+<div class="main-content">
+
+    <div id="modals">
+        <p>
+            Toast bars
+        </p>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-success btn-block" onClick={() =>
+                    this.props.layout.setToast({ message: this.props.language.resource['GeneralSuccess'], type: 'success' })
+                    }>Show Success Toast
+                </button>
+            </div>
+
+            <div class="col-md-4">
+                <button class="btn btn-danger btn-block" onClick={() =>
+                    this.props.layout.setToast({ message: this.props.language.resource['GeneralError'], type: 'error' })
+                    }>Show Error Toast
+                </button>
+
+            </div>
+
+            <div class="col-md-4">
+                <button class="btn btn-warning btn-block" onClick={() =>
+                    this.props.layout.setToast({ message: this.props.language.resource['GeneralError'], type: 'warning' })
+                    }>Show Warning Toast
+                </button>
+            </div>
+        </div>
+
+
+        <hr />
+
+        <p>
+            Modals
+        </p>
+
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary btn-block" value="modal-lg" @onclick="()=> modal.Open()">Show Large Modal</button>
+            </div>
+
+            <div class="col-md-4">
+                <button class="btn btn-primary btn-block" value=""  @onclick="()=> modal.Open()">Show Modal</button>
+            </div>
+
+            <div class="col-md-4">
+                <button class="btn btn-primary btn-block" value="modal-sm"  @onclick="()=> modal.Open()">Small Modal</button>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <p>
+            Standart warning bars
+        </p>
+
+        <div>
+            <div class="alert alert-primary">
+                This is a primary alert — check it out!
+            </div>
+            <div class="alert alert-secondary">
+                This is a secondary alert — check it out!
+            </div>
+            <div class="alert alert-success">
+                This is a success alert — check it out!
+            </div>
+            <div class="alert alert-danger">
+                This is a danger alert — check it out!
+            </div>
+            <div class="alert alert-warning">
+                This is a warning alert — check it out!
+            </div>
+            <div class="alert alert-info">
+                This is a info alert — check it out!
+            </div>
+            <div class="alert alert-light">
+                This is a light alert — check it out!
+            </div>
+            <div class="alert alert-dark">
+                This is a dark alert — check it out!
+            </div>
+        </div>
+
+
+        <Modal @ref="modal">
+            <Title>
+                @state.Localized("ConfirmDelete")
+            </Title>
+            <Body>
+                <strong>Test</strong>
+                @state.Localized("WillBeDeleted")
+            </Body>
+            <Footer>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" >
+                    @state.Localized("Confirm")
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    @state.Localized("Cancel")
+                </button>
+            </Footer>
+        </Modal>
+
+    </div>
+
+</div>
+
+
+@code {
+
+    private People people = new People();
+    public string curLang = "";
+    private Modal modal { get; set; }
+
+    private void HandleValidSubmit()
+    {
+
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        state.OnChange += StateHasChanged;
+        state.AddBreadCrumbItemStartWithHome(new BreadCrumbItem
+        {
+            Link = "formelements",
+            Text = "Form Elements"
+        });
+
+    }
+
+}

@@ -20,6 +20,23 @@ namespace AdminApp.Services
         public static string basePath = "";
         private ProductResult _productResult;
 
+        public string _menuOpen;
+        public string menuOpen
+        {
+
+            get
+            {
+                return _menuOpen;
+            }
+
+            set
+            {
+
+                _menuOpen = value;
+                NotifyBreadCrumbChanged();
+            }
+        }
+
         public ProductResult ProductResult
         {
 
@@ -79,11 +96,25 @@ namespace AdminApp.Services
             if (item == null) return;
             if (_breadCrumbItems == null) _breadCrumbItems = new List<BreadCrumbItem>();
 
-            if(!_breadCrumbItems.Any(x=>x.Link==item.Link && x.Text==item.Text))
+            if (!_breadCrumbItems.Any(x => x.Link == item.Link && x.Text == item.Text))
             {
                 _breadCrumbItems.Add(item);
                 NotifyBreadCrumbChanged();
             }
+
+        }
+
+        public void AddBreadCrumbItemStartWithHome(BreadCrumbItem item)
+        {
+            if (item == null) return;
+
+            _breadCrumbItems = new List<BreadCrumbItem>
+            {
+                 new BreadCrumbItem{ Link = "/", Text= "Home"}
+            };
+
+            _breadCrumbItems.Add(item);
+            NotifyBreadCrumbChanged();
 
         }
 

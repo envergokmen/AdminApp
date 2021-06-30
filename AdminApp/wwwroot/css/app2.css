@@ -242,3 +242,216 @@ main {
         padding: 0;
         margin: 5px;
     }
+
+
+
+.typographics {
+    padding: 35px;
+}
+
+
+    .typographics * {
+        font-size: 1.0rem;
+    }
+
+    .typographics .h1 {
+        font-size: 1.5rem;
+    }
+
+    .typographics .h2 {
+        font-size: 1.4rem;
+    }
+
+    .typographics .h3 {
+        font-size: 1.3rem;
+    }
+
+    .typographics .h4 {
+        font-size: 1.2rem;
+    }
+
+    .typographics .h5 {
+        font-size: 1.1rem;
+    }
+
+
+
+
+.tgl {
+    display: none;
+}
+
+    .tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+        box-sizing: border-box;
+    }
+
+        .tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection {
+            background: none;
+        }
+
+        .tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+            background: none;
+        }
+
+        .tgl + .tgl-btn {
+            outline: 0;
+            display: block;
+            width: 4em;
+            height: 2em;
+            position: relative;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+            .tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+                position: relative;
+                display: block;
+                content: "";
+                width: 50%;
+                height: 100%;
+            }
+
+            .tgl + .tgl-btn:after {
+                left: 0;
+            }
+
+            .tgl + .tgl-btn:before {
+                display: none;
+            }
+
+        .tgl:checked + .tgl-btn:after {
+            left: 50%;
+        }
+
+.tgl-light + .tgl-btn {
+    background: #d0d0d0;
+    border-radius: 2em;
+    padding: 2px;
+    transition: all .4s ease;
+}
+
+    .tgl-light + .tgl-btn:after {
+        border-radius: 50%;
+        background: #fff;
+        transition: all .2s ease;
+    }
+
+.tgl-light:checked + .tgl-btn {
+    background: #9FD6AE;
+}
+
+@media only screen and (max-width: 767px) {
+    .tgl-light + .tgl-btn {
+        margin-left: 3.5%;
+    }
+}
+
+
+#LeftNavContainer {
+    width: 210px;
+    float: left;
+    position: fixed;
+    height: 100%;
+}
+
+#MainAreaContainer {
+    float: none;
+    width: auto;
+    overflow: hidden;
+    margin-left: 210px;
+}
+
+
+#Burger {
+    display: none;
+    position: absolute;
+    font-size: 24px;
+    padding: 3px;
+}
+
+
+@media (max-width: 980px) {
+    .percent45-xs {
+        width: 45%;
+    }
+
+    #Burger {
+        display: block;
+    }
+
+    footer {
+        display: none !important;
+    }
+
+    #LeftNavContainer {
+        display: block;
+        position: absolute;
+        top: 40px;
+        left: -210px;
+        z-index: 999;
+        transition: all 0.2s;
+    }
+
+        #LeftNavContainer.open {
+            left: -0px;
+            transition: all 0.2s;
+        }
+
+    #MainAreaContainer {
+        margin-left: 0;
+    }
+
+    .LoadMore {
+        width: 120px !important;
+    }
+}
+
+footer {
+    background: black;
+    padding: 10px;
+    color: grey;
+}
+
+@media (max-width: 1140px) {
+    .hide-md {
+        display: none;
+    }
+
+
+    .main-content {
+        padding:15px 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hide-md {
+        display: block;
+    }
+
+    .hide-sm {
+        display: none;
+    }
+
+
+    .main-content {
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hide-xs {
+        display: none;
+    }
+
+
+    .main-content {
+        padding:7px  10px;
+    }
+}
+
+.main-content{
+    padding:20px 40px;
+}

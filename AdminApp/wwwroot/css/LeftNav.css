@@ -1,0 +1,104 @@
+﻿ul.page-sidebar-menu {
+    margin: 0;
+    padding: 0;
+    background-color: #3e3e3e;
+    list-style: none;
+    font-size: 13px;
+    height: 100%;
+}
+
+    ul.page-sidebar-menu > li > a {
+        padding: 10px 20px;
+        color: #bdbdbd;
+        display: block;
+        border-bottom: 1px solid #4e4e4e;
+        text-decoration: none;
+        position: relative;
+    }
+
+        ul.page-sidebar-menu > li > a:hover {
+            color: #fff;
+        }
+
+        ul.page-sidebar-menu > li > a i.fa-angle-down {
+            position: absolute;
+            top: 12px;
+            right: 25px;
+        }
+
+    ul.page-sidebar-menu li a.active {
+        color: #fff;
+    }
+
+        ul.page-sidebar-menu li a.active i.fa-angle-down {
+            color: #fff;
+            transform: rotate(-180deg);
+            transition: transform .5s ease-in-out;
+        }
+
+        ul.page-sidebar-menu li a.active + .sub-menu {
+            display: block;
+        }
+
+    ul.page-sidebar-menu li a + .sub-menu {
+        display: none;
+        background-color: #1f1f1f;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.page-sidebar-menu > li > a:active, ul.page-sidebar-menu > li > a:focus, ul.page-sidebar-menu > li > a:target {
+        background-color: #1e92c4 !important;
+        color: #fff !important;
+    }
+
+    ul.page-sidebar-menu > .sub-menu > li a:active, ul.page-sidebar-menu > .sub-menu > li a:focus, ul.page-sidebar-menu > .sub-menu > li > a:target,
+    ul.page-sidebar-menu .sub-menu li > a.active {
+        background-color: #000000 !important;
+        color: #fff !important;
+    }
+
+        ul.page-sidebar-menu li a:active i,
+        ul.page-sidebar-menu li a:focus i,
+        ul.page-sidebar-menu li a:target i {
+            color: #fff !important;
+        }
+
+    ul.page-sidebar-menu > li > a .iconfirst {
+        position: unset;
+        margin-right: 10px;
+        transform: unset;
+        transition: none;
+    }
+
+    ul.page-sidebar-menu > li > .sub-menu a {
+        padding: 10px 20px;
+        color: #bdbdbd;
+        display: block;
+        border-bottom: 1px solid #313131;
+        text-decoration: none;
+    }
+
+        ul.page-sidebar-menu > li > .sub-menu a i {
+            margin-right: 10px;
+            color: #6c6c6c;
+        }
+
+        ul.page-sidebar-menu > li > .sub-menu a:hover {
+            background-color: #131313;
+            color: #fff;
+        }
+
+            ul.page-sidebar-menu > li > .sub-menu a:hover i {
+                color: #fff;
+            }
+
+@media only screen and (max-width: 767px) {
+    ul.page-sidebar-menu {
+        font-size: 15px;
+    }
+
+    #LeftNavContainer, #LeftNavContainer.open {
+        top: 50px;
+    }
+}

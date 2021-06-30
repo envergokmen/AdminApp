@@ -22,19 +22,6 @@
         "LinkTo": "/fetchdata",
         "Title": "Fetch Data",
         "icon": "home"
-      },
-      {
-        "Name": "Login",
-        "LinkTo": "/login",
-        "Title": "Login",
-        "icon": "home",
-        "SubItems": [
-          {
-            "Name": "Login",
-            "LinkTo": "/login",
-            "icon": "user"
-          }
-        ]
       }
     ]
   },

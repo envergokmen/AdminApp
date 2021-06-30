@@ -18,6 +18,9 @@
         </p>
     </div>
 
+    <div>
+        <input name="scheduled" placeholder="Scheduled" id="scheduled" type="checkbox" class="tgl tgl-light" value="true" checked=""><label class="tgl-btn" for="scheduled"></label>
+    </div>
 
     <div class="row g-5">
         <div class="col-md-5 col-lg-4 order-md-last">
@@ -245,7 +248,12 @@
     protected override async Task OnInitializedAsync()
     {
         state.OnChange += StateHasChanged;
+        state.AddBreadCrumbItemStartWithHome(new BreadCrumbItem
+        {
+            Link = "formelements",
+            Text = "Form Elements"
+        });
 
-    }
+}
 
 }

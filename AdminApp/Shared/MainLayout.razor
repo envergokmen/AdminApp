@@ -4,17 +4,19 @@
 @inject HttpClient Http
 @inject StateContainer state
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
-<div class="page">
+<div id="MainContainer">
 
+    <div id="LeftNavContainer" class="@(state.menuOpen)">
+        <NavMenu />
+    </div>
 
-    <NavMenu />
-    <div class="main">
-
-        <BreadCrumb />
-        <div class="main-content">
+    <div id="MainAreaContainer">
+        <div id="MainArea">
+            <BreadCrumb />
             @Body
         </div>
     </div>
+
 </div>
 
 
@@ -23,7 +25,8 @@
     protected override async Task OnInitializedAsync()
     {
         state.OnChange += StateHasChanged;
+        state.OnBreadCrumbChange += StateHasChanged;
     }
 
-  
+
 }

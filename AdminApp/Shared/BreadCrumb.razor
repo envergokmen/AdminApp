@@ -2,26 +2,30 @@
 
 @if (state.BreadCrumbItems != null && state.BreadCrumbItems.Any())
 {
-    <div id="BreadCrumb">
-        <div id="BreadCrumbLeftCon">
-            @foreach (var bread in state.BreadCrumbItems)
-            {
-                if (bread.Link ==null || bread.Link == "")
-                {
-                    <span>
-                        @state.Localized(bread.Text)
-                    </span>
-
-                }
-                else
-                {
-                    <NavLink href=@bread.Link>
-                        @state.Localized(bread.Text)
-                    </NavLink>
-                }
-            }
-        </div>
+<div id="BreadCrumb">
+    <div id="Burger" className="@state.menuOpen" @onclick="toggleMenu">
+           <i class="fa fa-bars"></i>
     </div>
+
+    <div id="BreadCrumbLeftCon">
+        @foreach (var bread in state.BreadCrumbItems)
+        {
+            if (bread.Link == null || bread.Link == "")
+            {
+                <span>
+                    @state.Localized(bread.Text)
+                </span>
+
+            }
+            else
+            {
+                <NavLink href=@bread.Link>
+                    @state.Localized(bread.Text)
+                </NavLink>
+            }
+        }
+    </div>
+</div>
 }
 
 @code {
@@ -30,4 +34,10 @@
     {
         state.OnBreadCrumbChange += StateHasChanged;
     }
+
+    private void toggleMenu()
+    {
+        state.menuOpen = (state.menuOpen == "closed") ?  "open" : "closed";
+    }
+
 }
